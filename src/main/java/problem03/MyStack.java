@@ -7,13 +7,13 @@ public class MyStack {
 	private int size;
 
 	public MyStack( int size ) {
-		this.size = 30;
+		this.size = size;
 		this.buffer = new String[this.size];
 	}
 	
 	public void push(String item) {
 		if(index == size) {
-			return;
+			size();
 		}
 		this.buffer[index]= item;
 		index++;
@@ -24,8 +24,8 @@ public class MyStack {
 		if(index == 0) {	
 			return "null";
 		}
-		result = this.buffer[index-1];
-		this.buffer[index--] = null;
+		result = this.buffer[--index];
+		this.buffer[index] = null;
 		return result;		
 	}
 
@@ -38,7 +38,9 @@ public class MyStack {
 	}
 	
 	public int size() {
-		
+		String[] nBuffer = new String[++this.size];
+		System.arraycopy(this.buffer, 0, nBuffer, 0, this.buffer.length);
+		this.buffer = nBuffer;
 		return 0;
 	}
 }

@@ -1,9 +1,8 @@
 package problem04;
 
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -13,7 +12,7 @@ public class Main {
 	static int time;
 	static int count=1;
 	public static void main(String[] args) throws IOException {
-		int gugu = new Random().nextInt(9)+1;
+		
 		for(int j= 0; j<9;j++) {
 			for(int i=0; i<2; i++) {
 				gugudan[i][j] = String.valueOf((new Random().nextInt(9)+1))+"X"+String.valueOf((new Random().nextInt(9)+1));
@@ -34,7 +33,7 @@ public class Main {
 			}else {
 				String question =gugudan[x][y];
 				gugudan[x][y]=null;
-				System.out.println(count+". "+question);
+				System.out.println(count+". "+question+" ?");
 				count++;
 				int userInput = sc.nextInt();
 				int answer = Character.getNumericValue(question.charAt(0))*Character.getNumericValue(question.charAt(2));
@@ -44,13 +43,16 @@ public class Main {
 			}
 			
 		}
+		sc.close();
 		long endTime = System.currentTimeMillis();
-		System.out.println(point);
-		System.out.println(endTime - startTime);
-		PrintWriter pw = new PrintWriter("c:/out.txt");
-		
-		pw.println(point / time);
-		
+//		System.out.println(point);
+//		System.out.println(endTime - startTime);
+		time = (int) (endTime - startTime);
+		File file = new File("test.txt");
+		FileWriter fw = new FileWriter(file,true);
+		fw.write("성공 횟수"+point+ " / 수행시간 "+ time+"\r\n");
+		fw.flush();
+		fw.close();
 	}
 	public static boolean nullCheck() {
 		boolean result =false;
